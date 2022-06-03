@@ -19,14 +19,14 @@ class UserAdmin(BaseUserAdmin):
                 "email",
                 "password",
             ),
-        },),
+        }),
         (_("Personal Information"), {
             "fields": (
                 "username",
                 "first_name",
                 "last_name",
             )
-        },),
+        }),
         (_("Permission and Groups"), {
             "fields": (
                 "is_active",
@@ -35,13 +35,13 @@ class UserAdmin(BaseUserAdmin):
                 "groups",
                 "user_permissions",
             )
-        },),
+        }),
         (_("Important Dates"), {
             "fields": (
                 "last_login",
                 "date_joined"
             )
-        },)
+        })
 
     )
     add_fieldsets = (
