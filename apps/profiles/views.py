@@ -30,6 +30,10 @@ class TopAgentsListAPIView(generics.ListAPIView):
     queryset  = Profile.objects.filter(top_agent=True)
     serializer_class = ProfileSerializer
 
+'''
+这里用了两种不同的自定义返回格式 上面的agentlist用representation返回的list
+下面的用renderer json.dumps返回的dict
+'''
 class GetProfileAPIView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     renderer_classes = [ProfileJSONRenderer]
