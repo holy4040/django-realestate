@@ -1,7 +1,5 @@
 import random
 import string
-from tabnanny import verbose
-
 from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator
@@ -56,7 +54,7 @@ class Property(TimeStampedUUIDModel):
         default=112,
     )
     price = models.DecimalField(
-        verbose_name=_("Price"), max_digits=8, decimal_places=2, default=0.0
+        verbose_name=_("Price"), max_digits=12, decimal_places=2, default=0.0
     )
     tax = models.DecimalField(
         verbose_name=_("Property Tax"),
@@ -125,12 +123,12 @@ class Property(TimeStampedUUIDModel):
 
     def save(self, *args, **kwargs):
         self.title = str.title(self.title)
-        self.description = str.description(self.description)
+        self.description = str.capitalize(self.description)
         self.ref_code = "".join(random.choices(string.ascii_uppercase + string.digits, k=10))
         super(Property, self).save(*args, **kwargs)
     
     @property
-    def finalproperty_prices(self):
+    def final_property_price(self):
         tax_percentage = self.tax
         property_price = self.price
         tax_amount = round(tax_percentage * property_price, 2)
